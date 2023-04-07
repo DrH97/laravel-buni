@@ -1,0 +1,53 @@
+{
+    "name": "drh/buni",
+    "description": "Buni API Package",
+    "keywords": [
+        "package",
+        "payments",
+        "buni",
+        "kcb"
+    ],
+    "homepage": "https://github.com/drh97/laravel-buni",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dr H",
+            "email": "jmnabangi@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "illuminate/contracts": "^9.28|^10.0",
+        "spatie/laravel-package-tools": "^1.14"
+    },
+    "require-dev": {
+        "mockery/mockery": "^1.5",
+        "orchestra/testbench": "^7.7|^8.0",
+        "pestphp/pest": "^1.22",
+        "phpunit/phpunit": "^9.5.24",
+        "spatie/pest-plugin-test-time": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "DrH\\Buni\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "DrH\\Buni\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
