@@ -1,7 +1,7 @@
 # Buni API Library
 
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/drh97/laravel-buni/run-tests?label=tests)](https://github.com/drh97/laravel-buni/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/drh97/laravel-buni/Fix%20PHP%20code%20style%20issues?label=code%20style)](https://github.com/drh97/laravel-buni/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
+[![GitHub Tests Workflow](https://github.com/DrH97/laravel-buni/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/DrH97/laravel-buni/actions/workflows/test.yml)
+[![Github Style Workflow](https://github.com/DrH97/laravel-buni/actions/workflows/styleci.yml/badge.svg?branch=master)](https://github.com/DrH97/laravel-buni/actions/workflows/styleci.yml)
 [![codecov](https://codecov.io/gh/DrH97/laravel-buni/branch/main/graph/badge.svg?token=6b0d0ba1-c2c6-4077-8c3a-1f567eea88a0)](https://codecov.io/gh/DrH97/laravel-buni)
 
 [![Latest Stable Version](http://poser.pugx.org/drh/laravel-buni/v)](https://packagist.org/packages/drh/laravel-buni)
