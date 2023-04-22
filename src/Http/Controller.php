@@ -2,6 +2,8 @@
 
 namespace DrH\Buni\Http;
 
+use DrH\Buni\Events\BuniStkRequestFailedEvent;
+use DrH\Buni\Events\BuniStkRequestSuccessEvent;
 use DrH\Buni\Models\BuniStkCallback;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -34,13 +36,13 @@ class Controller extends \Illuminate\Routing\Controller
                 $callback['result_desc'] .= ' - ' . $data->ResultCode;
             }
 
-            $stkRequest = BuniStkCallback::create($callback);
+            $stkCallback = BuniStkCallback::create($callback);
 
-//            $event = $callback->status == 1 ?
-//                new BuniStkRequestSuccessEvent($stkRequest, $data) :
-//                new BuniStkRequestFailedEvent($stkRequest, $data);
+            $event = $stkCallback->result_code == 0 ?
+                new BuniStkRequestSuccessEvent($stkCallback, $request->stkCallback) :
+                new BuniStkRequestFailedEvent($stkCallback, $request->stkCallback);
 
-//            event($event);
+            event($event);
         } catch (Exception $e) {
             buniLogError('Error handling callback. - ' . $e->getMessage(), $e->getTrace());
         }

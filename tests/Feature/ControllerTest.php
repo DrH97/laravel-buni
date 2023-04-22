@@ -1,15 +1,16 @@
 <?php
 
+use DrH\Buni\Events\BuniStkRequestFailedEvent;
+use DrH\Buni\Events\BuniStkRequestSuccessEvent;
 use DrH\Buni\Models\BuniStkCallback;
 use DrH\Buni\Models\BuniStkRequest;
+use Illuminate\Support\Facades\Event;
 use function Pest\Laravel\assertDatabaseCount;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\postJson;
 
 
 $stkCallbackUrl = '/buni/stk-callback';
-
-//beforeAll(function() { config()->set('buni.logging.enabled', true); });
 
 it('fails to handle empty callback', function () use ($stkCallbackUrl) {
     postJson($stkCallbackUrl)->assertSuccessful()
@@ -20,7 +21,6 @@ it('fails to handle empty callback', function () use ($stkCallbackUrl) {
 
 it('fails to handle malformed callback', function () use ($stkCallbackUrl) {
     postJson($stkCallbackUrl, [
-        // Missing initiator reference
         "stkCallback" => [
             "MerchantRequestID" => "3789-53045504-1",
             "ResultCode" => 0,
@@ -50,7 +50,6 @@ it('fails to handle malformed callback', function () use ($stkCallbackUrl) {
 });
 
 it('handles successful callback', function () use ($stkCallbackUrl) {
-
     BuniStkRequest::create([
         'phone_number' => '254722000000',
         'amount' => 70000,
@@ -60,36 +59,15 @@ it('handles successful callback', function () use ($stkCallbackUrl) {
         'merchant_request_id' => '10054-2753415-2'
     ]);
 
-    postJson($stkCallbackUrl, [
-        "stkCallback" => [
-            "MerchantRequestID" => "3789-53045504-1",
-            "CheckoutRequestID" => "ws_CO_05042023093636023714611696",
-            "ResultCode" => 0,
-            "ResultDesc" => "The service request is processed successfully.",
-            "CallbackMetadata" => [
-                "Item" => [[
-                    "Name" => "Amount",
-                    "Value" => 1.0
-                ], [
-                    "Name" => "MpesaReceiptNumber",
-                    "Value" => "RD56FI0EGI"
-                ], [
-                    "Name" => "Balance"
-                ], [
-                    "Name" => "TransactionDate",
-                    "Value" => 20230405093635
-                ], [
-                    "Name" => "PhoneNumber",
-                    "Value" => 254722000000
-                ]]
-            ]
-        ]
-    ])->assertSuccessful()
+//    dd($this->mockResponses['stk']['callback']['success']);
+
+    postJson($stkCallbackUrl, $this->mockResponses['stk']['callback']['success'])
+        ->assertSuccessful()
         ->assertJson(['status' => true]);
 
     assertDatabaseCount((new BuniStkCallback())->getTable(), 1);
 
-//    Event::assertDispatched(BuniStkRequestSuccessEvent::class, 1);
+    Event::assertDispatched(BuniStkRequestSuccessEvent::class, 1);
 });
 
 it('handles failed callback', function () use ($stkCallbackUrl) {
@@ -107,21 +85,16 @@ it('handles failed callback', function () use ($stkCallbackUrl) {
         'checkout_request_id' => 'ws_CO_02052018230213621',
     ]);
 
-    postJson($stkCallbackUrl, [
-        "stkCallback" => [
-            "MerchantRequestID" => "3789-53045504-1",
-            "CheckoutRequestID" => "ws_CO_05042023093636023714611696",
-            "ResultCode" => 'ERR_CODE',
-            "ResultDesc" => "The service request failed.",
-        ]
-    ])->assertSuccessful()
+    postJson($stkCallbackUrl, $this->mockResponses['stk']['callback']['failed'])
+        ->assertSuccessful()
         ->assertJson(['status' => true]);
 
     assertDatabaseCount((new BuniStkCallback())->getTable(), 1);
     assertDatabaseHas((new BuniStkCallback())->getTable(), [
-        'checkout_request_id' => 'ws_CO_05042023093636023714611696',
+        'checkout_request_id' => 'ws_CO_05042023093636023]',
         'result_code' => '-1',
+        "result_desc" => 'The service request failed.' . ' - ' . 'ERR_CODE',
     ]);
 
-//    Event::assertDispatched(TendePayRequestFailedEvent::class, 1);
+    Event::assertDispatched(BuniStkRequestFailedEvent::class, 1);
 });
