@@ -1,7 +1,7 @@
 # Buni API Library
 
-[![GitHub Tests Workflow](https://github.com/DrH97/laravel-buni/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/DrH97/laravel-buni/actions/workflows/test.yml)
-[![Github Style Workflow](https://github.com/DrH97/laravel-buni/actions/workflows/styleci.yml/badge.svg?branch=master)](https://github.com/DrH97/laravel-buni/actions/workflows/styleci.yml)
+[![GitHub Tests Workflow](https://github.com/DrH97/laravel-buni/actions/workflows/run-tests.yml/badge.svg?branch=master)](https://github.com/DrH97/laravel-buni/actions/workflows/run-tests.yml)
+[![Github Style Workflow](https://github.com/DrH97/laravel-buni/actions/workflows/php-cs-fixer.yml/badge.svg?branch=master)](https://github.com/DrH97/laravel-buni/actions/workflows/php-cs-fixer.yml)
 [![codecov](https://codecov.io/gh/DrH97/laravel-buni/branch/main/graph/badge.svg?token=6b0d0ba1-c2c6-4077-8c3a-1f567eea88a0)](https://codecov.io/gh/DrH97/laravel-buni)
 
 [![Latest Stable Version](http://poser.pugx.org/drh/laravel-buni/v)](https://packagist.org/packages/drh/laravel-buni)
