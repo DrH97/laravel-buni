@@ -1,6 +1,6 @@
 {
     "name": "drh/buni",
-    "description": "Buni API Package",
+    "description": "Buni API Library",
     "keywords": [
         "package",
         "payments",
