@@ -78,36 +78,40 @@ abstract class MockServerTestCase extends TestCase
             ],
             'callback' => [
                 'success' => [
-                    "stkCallback" => [
-                        "MerchantRequestID" => "3789-53045504-1",
-                        "CheckoutRequestID" => "ws_CO_05042023093636023]",
-                        "ResultCode" => 0,
-                        "ResultDesc" => "The service request is processed successfully.",
-                        "CallbackMetadata" => [
-                            "Item" => [[
-                                "Name" => "Amount",
-                                "Value" => 1.0
-                            ], [
-                                "Name" => "MpesaReceiptNumber",
-                                "Value" => "RD56FI0EGI"
-                            ], [
-                                "Name" => "Balance"
-                            ], [
-                                "Name" => "TransactionDate",
-                                "Value" => 20230405093635
-                            ], [
-                                "Name" => "PhoneNumber",
-                                "Value" => 254722000000
-                            ]]
+                    "Body" => [
+                        "stkCallback" => [
+                            "MerchantRequestID" => "3789-53045504-1",
+                            "CheckoutRequestID" => "ws_CO_05042023093636023]",
+                            "ResultCode" => 0,
+                            "ResultDesc" => "The service request is processed successfully.",
+                            "CallbackMetadata" => [
+                                "Item" => [[
+                                    "Name" => "Amount",
+                                    "Value" => 1.0
+                                ], [
+                                    "Name" => "MpesaReceiptNumber",
+                                    "Value" => "RD56FI0EGI"
+                                ], [
+                                    "Name" => "Balance"
+                                ], [
+                                    "Name" => "TransactionDate",
+                                    "Value" => 20230405093635
+                                ], [
+                                    "Name" => "PhoneNumber",
+                                    "Value" => 254722000000
+                                ]]
+                            ]
                         ]
                     ]
                 ],
                 'failed' => [
-                    "stkCallback" => [
-                        "MerchantRequestID" => "3789-53045504-1",
-                        "CheckoutRequestID" => "ws_CO_05042023093636023]",
-                        "ResultCode" => 'ERR_CODE',
-                        "ResultDesc" => 'The service request failed.',
+                    "Body" => [
+                        "stkCallback" => [
+                            "MerchantRequestID" => "3789-53045504-1",
+                            "CheckoutRequestID" => "ws_CO_05042023093636023]",
+                            "ResultCode" => 'ERR_CODE',
+                            "ResultDesc" => 'The service request failed.',
+                        ]
                     ]
                 ],
             ],

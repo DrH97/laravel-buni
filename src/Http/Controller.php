@@ -17,7 +17,7 @@ class Controller extends \Illuminate\Routing\Controller
         buniLogInfo('STK CB: ', $request->all());
 
         try {
-            $data = (object)$request->stkCallback;
+            $data = (object)$request->Body['stkCallback'];
 
             $callback = [
                 'merchant_request_id' => $data->MerchantRequestID,
@@ -39,8 +39,8 @@ class Controller extends \Illuminate\Routing\Controller
             $stkCallback = BuniStkCallback::create($callback);
 
             $event = $stkCallback->result_code == 0 ?
-                new BuniStkRequestSuccessEvent($stkCallback, $request->stkCallback) :
-                new BuniStkRequestFailedEvent($stkCallback, $request->stkCallback);
+                new BuniStkRequestSuccessEvent($stkCallback, $request->Body['stkCallback']) :
+                new BuniStkRequestFailedEvent($stkCallback, $request->Body['stkCallback']);
 
             event($event);
         } catch (Exception $e) {

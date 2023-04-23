@@ -27,9 +27,9 @@ class Core
     {
         $endpoint = Endpoints::build($endpointSuffix);
 
-        buniLogInfo("request: ", [$endpoint, $body]);
+        buniLogInfo('REQ: ', [$endpoint, $body]);
         $response = $this->baseClient->sendRequest('POST', $endpoint, $this->getBearerHeader(), $body);
-        buniLogInfo('body: ', $response);
+        buniLogInfo('RES: ', $response);
 
         return $response;
     }

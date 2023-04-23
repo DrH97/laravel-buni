@@ -32,7 +32,7 @@ class BaseClient
             $url,
             $options
         );
-        buniLogInfo('response: ', parseGuzzleResponse($response));
+        buniLogInfo('API: ', parseGuzzleResponse($response));
 
         return json_decode($response->getBody(), true);
     }

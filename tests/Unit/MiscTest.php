@@ -16,6 +16,8 @@ test('logger', function () {
 
     expect(shouldBuniLog())->toBe(true);
 
+    config()->set('buni.logging.channels', ['single']);
+
     buniLogError('test Logging Error');
 
     config()->set('buni.logging.channels', [
