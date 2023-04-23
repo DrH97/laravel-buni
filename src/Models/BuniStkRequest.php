@@ -32,6 +32,7 @@ class BuniStkRequest extends Model
 
     public function callback(): HasOne
     {
-        return $this->hasOne(BuniStkCallback::class, 'checkout_request_id', 'checkout_request_id');
+        // TODO: confirm why checkout request is not returned in initial request
+        return $this->hasOne(BuniStkCallback::class, 'merchant_request_id', 'merchant_request_id');
     }
 }

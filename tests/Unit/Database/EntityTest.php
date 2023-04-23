@@ -46,7 +46,7 @@ it('handles relationships', function () {
     expect($request->callback)->toBeNull();
 
     $callback = BuniStkCallback::create([
-        'merchant_request_id' => 'test_merchant_req_id',
+        'merchant_request_id' => '10054-2753415-2',
         'checkout_request_id' => 'ws_CO_02052018230213621',
         'result_code' => '0',
         'result_desc' => 'Success',

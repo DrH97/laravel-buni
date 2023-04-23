@@ -59,8 +59,6 @@ it('handles successful callback', function () use ($stkCallbackUrl) {
         'merchant_request_id' => '10054-2753415-2'
     ]);
 
-//    dd($this->mockResponses['stk']['callback']['success']);
-
     postJson($stkCallbackUrl, $this->mockResponses['stk']['callback']['success'])
         ->assertSuccessful()
         ->assertJson(['status' => true]);

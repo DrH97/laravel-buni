@@ -30,6 +30,6 @@ class BuniStkCallback extends Model
 
     public function request(): BelongsTo
     {
-        return $this->belongsTo(BuniStkRequest::class, 'checkout_request_id', 'checkout_request_id');
+        return $this->belongsTo(BuniStkRequest::class, 'merchant_request_id', 'merchant_request_id');
     }
 }

@@ -50,7 +50,7 @@ abstract class MockServerTestCase extends TestCase
             'request' => [
                 'success' => [
                     "response" => [
-                        "MerchantRequestID" => "24457-234847396-1",
+                        "MerchantRequestID" => "3789-53045504-1",
                         "ResponseCode" => "0",
                         "CustomerMessage" => "Success. Request accepted for processing",
                         "CheckoutRequestID" => false,

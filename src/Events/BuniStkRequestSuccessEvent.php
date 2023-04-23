@@ -13,8 +13,10 @@ class BuniStkRequestSuccessEvent
     use InteractsWithSockets;
     use SerializesModels;
 
-    public function __construct(public readonly BuniStkCallback $request, public readonly array $callback)
+    public function __construct(public readonly BuniStkCallback $callback, public readonly array $data)
     {
-        buniLogInfo('BuniStkRequestSuccessEvent: ', [$request, $callback]);
+        buniLogInfo('BuniStkRequestSuccessEvent: ', $callback->toArray());
+
+        $callback->request()->update(['status' => 'PAID']);
     }
 }

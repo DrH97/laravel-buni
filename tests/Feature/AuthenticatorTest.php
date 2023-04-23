@@ -39,8 +39,6 @@ it('throws on unset credentials', function () {
 
 
 it('throws on invalid credentials', function () {
-    config()->set('buni.logging.enabled', true);
-
     $this->mock->append(
         new Response(401, ['Content_type' => 'application/json'],
             json_encode($this->mockResponses['auth']['failed'])));
