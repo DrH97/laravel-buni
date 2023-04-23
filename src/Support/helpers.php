@@ -61,7 +61,7 @@ if (!function_exists('buniLogInfo')) {
     }
 }
 
-if (!function_exists('parseData')) {
+if (!function_exists('parseGuzzleResponse')) {
     function parseGuzzleResponse(ResponseInterface $response, bool $includeBody = false): array
     {
         $headers = [];
