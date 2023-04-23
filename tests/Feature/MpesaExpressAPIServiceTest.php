@@ -19,9 +19,9 @@ it('sends stk push successfully', function () {
         new Response(200, ['Content_type' => 'application/json'],
             json_encode($this->mockResponses['stk']['request']['success'])));
 
-    $response = (new MpesaExpressAPIService($this->baseClient))->push(1, '0722000000', 'test');
+    $response = (new MpesaExpressAPIService($this->baseClient))->push(1, '722000000', 'test');
 
-    expect($response)->toBeInstanceOf(BuniStkRequest::class)->toHaveKey('phone_number', '0722000000');
+    expect($response)->toBeInstanceOf(BuniStkRequest::class)->toHaveKey('phone_number', '254722000000');
 });
 
 it('throws on unsuccessful stk push', function () {
@@ -51,7 +51,7 @@ it('sends stk push and processes successful callback', function () use ($stkCall
         ->assertSuccessful()
         ->assertJson(['status' => true]);
 
-    expect($request->refresh())->toBeInstanceOf(BuniStkRequest::class)->toHaveKey('phone_number', '0722000000')
+    expect($request->refresh())->toBeInstanceOf(BuniStkRequest::class)->toHaveKey('phone_number', '254722000000')
         ->and($request->callback)->toBeInstanceOf(BuniStkCallback::class)->toHaveKey('phone_number', '254722000000')
         ->and($request->status)->toBe('PAID');
 });
@@ -71,7 +71,7 @@ it('sends stk push and processes failed callback', function () use ($stkCallback
         ->assertSuccessful()
         ->assertJson(['status' => true]);
 
-    expect($request->refresh())->toBeInstanceOf(BuniStkRequest::class)->toHaveKey('phone_number', '0722000000')
+    expect($request->refresh())->toBeInstanceOf(BuniStkRequest::class)->toHaveKey('phone_number', '254722000000')
         ->and($request->callback)->toBeInstanceOf(BuniStkCallback::class)->toHaveKey('result_code', '-1')
         ->and($request->status)->toBe('FAILED');
 });
