@@ -4,6 +4,7 @@ namespace DrH\Buni\Library;
 
 use DrH\Buni\Exceptions\BuniException;
 use GuzzleHttp\Exception\GuzzleException;
+use Illuminate\Support\Str;
 
 class Core
 {
@@ -41,6 +42,28 @@ class Core
         $bearer = $this->authenticator->authenticate();
 
         return ['Authorization' => 'Bearer ' . $bearer];
+    }
+
+    public function formatPhoneNumber(string $number, bool $strip_plus = true): string
+    {
+        $number = preg_replace('/\s+/', '', $number);
+        $replace = static function ($needle, $replacement) use (&$number) {
+            if (Str::startsWith($number, $needle)) {
+                $pos = strpos($number, $needle);
+                $length = strlen($needle);
+                $number = substr_replace($number, $replacement, $pos, $length);
+            }
+        };
+        $replace('2547', '+2547');
+        $replace('07', '+2547');
+        $replace('2541', '+2541');
+        $replace('01', '+2541');
+        $replace('7', '+2547');
+        $replace('1', '+2541');
+        if ($strip_plus) {
+            $replace('+254', '254');
+        }
+        return $number;
     }
 
 }

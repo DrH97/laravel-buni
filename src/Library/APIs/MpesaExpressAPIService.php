@@ -24,6 +24,8 @@ class MpesaExpressAPIService extends Core
     {
         $callback = config('buni.urls.stk_callback');
 
+        $phone = $this->formatPhoneNumber($phone);
+
         $body = [
             'phoneNumber' => $phone,
             'amount' => $amount,

@@ -68,6 +68,13 @@ abstract class MockServerTestCase extends TestCase
                         "description" => "Invalid Credentials. Make sure you have given the correct access token"
                     ]
                 ],
+                'failed2' => [
+                    "response" => [],
+                    "header" => [
+                        "statusDescription" => "STK Push Backend Posting Failure: Bad Request - Invalid PhoneNumber",
+                        "statusCode" => "1"
+                    ]
+                ]
             ],
             'callback' => [
                 'success' => [

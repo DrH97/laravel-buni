@@ -63,7 +63,10 @@ class Authenticator
         return $this->client->sendRequest(
             'POST',
             $this->endpoint,
-            ['Authorization' => 'Basic ' . $this->credentials]
+            [
+                'Authorization' => 'Basic ' . $this->credentials,
+                'Content-Type' => '',
+            ]
         );
     }
 
