@@ -20,7 +20,7 @@ return new class extends Migration {
 
             $table->string('status')->default('REQUESTED');
             $table->string('merchant_request_id')->unique();
-            $table->string('checkout_request_id');
+            $table->string('checkout_request_id')->index();
             $table->unsignedInteger('relation_id')->nullable();
             $table->timestamps();
         });

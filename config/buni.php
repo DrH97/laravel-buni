@@ -42,7 +42,7 @@ return [
          * Note: This package has already routes for handling this callback.
          * You should leave this values as they are unless you know what you are doing.
          */
-        'stk-callback' => env('APP_URL') . '/buni/callbacks/stk',
+        'stk_callback' => env('APP_URL') . '/buni/callbacks/stk',
     ],
 
     /*
