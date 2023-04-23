@@ -96,3 +96,29 @@ it('handles failed callback', function () use ($stkCallbackUrl) {
 
     Event::assertDispatched(BuniStkRequestFailedEvent::class, 1);
 });
+
+
+it('handles duplicate callback', function () use ($stkCallbackUrl) {
+    BuniStkRequest::create([
+        'phone_number' => '254722000000',
+        'amount' => 70000,
+        'invoice_number' => 'Test Case',
+        'description' => 'My tests are running',
+        'checkout_request_id' => 'ws_CO_02052018230213621',
+        'merchant_request_id' => '10054-2753415-2'
+    ]);
+
+    postJson($stkCallbackUrl, $this->mockResponses['stk']['callback']['success'])
+        ->assertSuccessful()
+        ->assertJson(['status' => true]);
+
+    postJson($stkCallbackUrl, $this->mockResponses['stk']['callback']['failed'])
+        ->assertSuccessful()
+        ->assertJson(['status' => true]);
+
+    assertDatabaseCount((new BuniStkCallback())->getTable(), 1);
+
+    Event::assertDispatched(BuniStkRequestSuccessEvent::class, 1);
+
+    Event::assertNotDispatched(BuniStkRequestFailedEvent::class);
+});

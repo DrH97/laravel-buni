@@ -19,6 +19,10 @@ class Controller extends \Illuminate\Routing\Controller
         try {
             $data = (object)$request->Body['stkCallback'];
 
+            if (BuniStkCallback::whereMerchantRequestId($data->MerchantRequestID)->exists()) {
+                throw new Exception('callback exists');
+            }
+
             $callback = [
                 'merchant_request_id' => $data->MerchantRequestID,
                 'checkout_request_id' => $data->CheckoutRequestID,
@@ -44,7 +48,7 @@ class Controller extends \Illuminate\Routing\Controller
 
             event($event);
         } catch (Exception $e) {
-            buniLogError('Error handling callback. - ' . $e->getMessage(), $e->getTrace());
+            buniLogError('Error handling callback: ' . $e->getMessage(), $e->getTrace());
         }
 
         return response()->json(['status' => true]);
