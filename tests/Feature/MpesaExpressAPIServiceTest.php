@@ -9,7 +9,7 @@ use GuzzleHttp\Psr7\Response;
 use function Pest\Laravel\postJson;
 
 
-$stkCallbackUrl = '/buni/stk-callback';
+$stkCallbackUrl = '/buni/callbacks/stk';
 
 it('sends stk push successfully', function () {
     $this->mock->append(

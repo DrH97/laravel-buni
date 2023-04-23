@@ -26,13 +26,24 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | URL
+    | URLs
     |--------------------------------------------------------------------------
     |
-    | Url of the api
+    | Callback - Will be used to send you payment notifications.
     |
     */
-    'url' => env('BUNI_URL', 'https://uat.buni.kcbgroup.com'),
+    'urls' => [
+        'base' => env('BUNI_URL', 'https://uat.buni.kcbgroup.com'),
+        /*
+         * --------------------------------------------------------------------------------------
+         * Callbacks:
+         * ---------------------------------------------------------------------------------------
+         * Please update your app url in .env file
+         * Note: This package has already routes for handling this callback.
+         * You should leave this values as they are unless you know what you are doing.
+         */
+        'stk-callback' => env('APP_URL') . '/buni/callbacks/stk',
+    ],
 
     /*
     |--------------------------------------------------------------------------

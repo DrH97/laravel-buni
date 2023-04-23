@@ -10,7 +10,7 @@ use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\postJson;
 
 
-$stkCallbackUrl = '/buni/stk-callback';
+$stkCallbackUrl = 'buni/callbacks/stk';
 
 it('fails to handle empty callback', function () use ($stkCallbackUrl) {
     postJson($stkCallbackUrl)->assertSuccessful()
