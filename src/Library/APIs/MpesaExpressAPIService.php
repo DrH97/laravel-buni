@@ -59,9 +59,7 @@ class MpesaExpressAPIService extends Core
                 'checkout_request_id' => $response['CheckoutRequestID'],
                 'merchant_request_id' => $response['MerchantRequestID'],
             ];
-            $stk = BuniStkRequest::create($data);
-//            event(new BuniStkRequestEvent($stk, request()));
-            return $stk;
+            return BuniStkRequest::create($data);
         }
         throw new BuniException($response['ResponseDescription']);
     }

@@ -45,7 +45,7 @@ class Authenticator
             return $response->access_token;
 
         } catch (GuzzleException $exception) {
-            buniLogError('authErr', json_decode($exception->getResponse()?->getBody(), true));
+            buniLogError('authErr', json_decode($exception->getResponse()?->getBody(), true) ?? []);
 
             $message = $exception->getResponse() ?
                 $exception->getResponse()->getReasonPhrase() :

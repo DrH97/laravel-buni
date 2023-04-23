@@ -43,13 +43,14 @@ it('throws on invalid credentials', function () {
         new Response(401, ['Content_type' => 'application/json'],
             json_encode($this->mockResponses['auth']['failed'])));
 
-    dd(expect((new Authenticator($this->baseClient))->authenticate()));
+    (new Authenticator($this->baseClient))->authenticate();
 })->throws(BuniException::class, 'Unauthorized');
+
 
 it('throws on unexpected status', function () {
     $this->mock->append(
         new Response(500, ['Content_type' => 'application/json'],
             json_encode($this->mockResponses['auth']['failed'])));
 
-    dd(expect((new Authenticator($this->baseClient))->authenticate()));
+    (new Authenticator($this->baseClient))->authenticate();
 })->throws(BuniException::class);
