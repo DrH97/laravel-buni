@@ -8,7 +8,7 @@ return [
     | Specify whether this is a test app or production app
     |
     | Sandbox base url: https://uat.buni.kcbgroup.com
-    | Production base url: todo()
+    | Production base url: https://api.buni.kcbgroup.com
     */
     'sandbox' => env('BUNI_SANDBOX', false),
 
@@ -33,7 +33,7 @@ return [
     |
     */
     'urls' => [
-        'base' => env('BUNI_URL', 'https://uat.buni.kcbgroup.com'),
+        'base' => env('BUNI_URL'),
         /*
          * --------------------------------------------------------------------------------------
          * Callbacks:
