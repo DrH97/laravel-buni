@@ -51,8 +51,10 @@ class MpesaExpressAPIService extends Core
             throw new BuniException($response['fault']['message']);
         }
 
+        $header = $response['header'];
         $response = $response['response'];
-        if ($response['ResponseCode'] == 0) {
+
+        if ($header['statusCode'] == 0) {
             $data = [
                 'phone_number' => $body['phoneNumber'],
                 'amount' => $body['amount'],
@@ -63,7 +65,7 @@ class MpesaExpressAPIService extends Core
             ];
             return BuniStkRequest::create($data);
         }
-        throw new BuniException($response['ResponseDescription']);
+        throw new BuniException($response['ResponseDescription'] ?? $header['statusDescription']);
     }
 
 }

@@ -31,13 +31,13 @@ class Endpoints
             throw new BuniException("Endpoint is invalid or does not exist.");
         }
 
-        $defaultProductionUrl = 'https://uat.buni.kcbgroup.com';
+        $defaultProductionUrl = 'https://api.buni.kcbgroup.com';
         $defaultSandboxUrl = 'https://uat.buni.kcbgroup.com';
 
         $defaultUrl = config('buni.sandbox') ? $defaultSandboxUrl : $defaultProductionUrl;
 
         $baseEndpoint = rtrim(
-            config('buni.url', $defaultUrl),
+            config('buni.urls.base', $defaultUrl),
             '/'
         );
 

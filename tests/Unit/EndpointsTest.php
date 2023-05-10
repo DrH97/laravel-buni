@@ -6,7 +6,7 @@ use DrH\Buni\Library\Endpoints;
 use Illuminate\Support\Facades\Config;
 
 it('builds correct endpoints', function () {
-    Config::set('buni.url', 'http://localhost');
+    Config::set('buni.urls.base', 'http://localhost');
 
     $expectedEndpoint = 'http://localhost' . Endpoints::AUTH;
 
