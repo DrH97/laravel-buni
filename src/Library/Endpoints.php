@@ -37,7 +37,7 @@ class Endpoints
         $defaultUrl = config('buni.sandbox') ? $defaultSandboxUrl : $defaultProductionUrl;
 
         $baseEndpoint = rtrim(
-            config('buni.urls.base', $defaultUrl),
+            config('buni.urls.base') ?? $defaultUrl,
             '/'
         );
 
