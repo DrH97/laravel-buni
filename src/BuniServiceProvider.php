@@ -13,7 +13,9 @@ class BuniServiceProvider extends PackageServiceProvider
         $package
             ->name('laravel-buni')
             ->hasConfigFile()
-            ->hasMigrations(['create_buni_stk_requests_table', 'create_buni_stk_callbacks_table'])
+            ->hasMigrations([
+                'create_buni_stk_requests_table', 'create_buni_stk_callbacks_table', 'create_buni_ipns_table',
+                ])
             ->hasInstallCommand(function (InstallCommand $command) {
                 $command
                     ->publishConfigFile()

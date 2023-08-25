@@ -116,5 +116,28 @@ abstract class MockServerTestCase extends TestCase
                 ],
             ],
         ],
+        'ipn' => [
+            'request' => [
+                "transactionReference" => "TT22094VLK98",
+                "requestId" => "a7e446ae-1f00-456f-9da1-fd418c091129",
+                "channelCode" => "null",
+                "timestamp" => "20220404114325",
+                "transactionAmount" => "101",
+                "currency" => "KES",
+                "customerReference" => "Cash Deposit",
+                "customerName" => "SHADRACK KIPLANGAT KIRUI",
+                "customerMobileNumber" => "",
+                "balance" => "",
+                "narration" => "TEST",
+                "creditAccountIdentifier" => "1147489750",
+                "organizationShortCode" => "9750",
+                "tillNumber" => ""
+            ],
+            'response' => [
+                'transactionID' => 'a7e446ae-1f00-456f-9da1-fd418c091129',
+                'statusCode' => '0',
+                'statusMessage' => 'Notification received'
+            ]
+        ]
     ];
 }

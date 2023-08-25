@@ -2,8 +2,10 @@
 
 namespace DrH\Buni\Http;
 
+use DrH\Buni\Events\BuniIpnEvent;
 use DrH\Buni\Events\BuniStkRequestFailedEvent;
 use DrH\Buni\Events\BuniStkRequestSuccessEvent;
+use DrH\Buni\Models\BuniIpn;
 use DrH\Buni\Models\BuniStkCallback;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -52,5 +54,37 @@ class Controller extends \Illuminate\Routing\Controller
         }
 
         return response()->json(['status' => true]);
+    }
+
+
+    public function handleIpn(Request $request): JsonResponse
+    {
+        buniLogInfo('IPN: ', $request->all());
+
+        try {
+            $data = (object)$request->all();
+
+            if (BuniIpn::whereRequestId($data->requestId)->exists()) {
+                throw new Exception('ipn already received');
+            }
+
+            $ipnData = [];
+
+            foreach ($data as $key => $value) {
+                $ipnData[Str::snake($key)] = @$value;
+            }
+
+            $ipn = BuniIpn::create($ipnData);
+
+            event(new BuniIpnEvent($ipn));
+        } catch (Exception $e) {
+            buniLogError('Error handling ipn: ' . $e->getMessage(), $e->getTrace());
+        }
+
+        return response()->json([
+            'transactionID' => $request->requestId, // TODO: confirm its not requestId
+            'statusCode' => '0',
+            'statusMessage' => 'Notification received'
+        ]);
     }
 }

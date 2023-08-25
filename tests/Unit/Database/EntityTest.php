@@ -2,6 +2,7 @@
 
 namespace DrH\Buni\Tests\Database;
 
+use DrH\Buni\Models\BuniIpn;
 use DrH\Buni\Models\BuniStkCallback;
 use DrH\Buni\Models\BuniStkRequest;
 
@@ -30,6 +31,25 @@ it('can run migrations', function () {
     $callback = BuniStkCallback::first();
 
     expect($callback->checkout_request_id)->toBe('test_checkout_req_id');
+
+    BuniIpn::create([
+        'transaction_reference' => 'test_tx_ref',
+        'request_id' => 'test_req_id',
+        'timestamp' => '20220404114325',
+        'transaction_amount' => '0',
+        'currency' => 'KES',
+        'customer_reference' => 'Cash Deposit',
+        'customer_name' => 'SHADRACK',
+        'customer_mobile_number' => '',
+        'narration' => 'Success',
+        'credit_account_identifier' => '1147489750',
+        'organization_short_code' => '9750',
+        'till_number' => '',
+    ]);
+
+    $ipn = BuniIpn::first();
+
+    expect($ipn->transaction_reference)->toBe('test_tx_ref');
 });
 
 
