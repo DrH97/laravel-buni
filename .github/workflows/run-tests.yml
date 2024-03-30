@@ -8,13 +8,8 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        os: [ ubuntu-latest ]
         php: [ 8.2, 8.3 ]
         laravel: [ 11.* ]
-        testbench: [ 9.* ]
-    #        include:
-    #          - laravel: 10.*, 11.*
-    #            testbench: 8.*
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }}
 
@@ -27,16 +22,6 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
-
-      #      - name: Setup problem matchers
-      #        run: |
-      #          echo "::add-matcher::${{ runner.tool_cache }}/php.json"
-      #          echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
-
-      #      - name: Install dependencies
-      #        run: |
-      #          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "nesbot/carbon:^2.64.1" --no-interaction --no-update
-      #          composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
       - name: Install Composer dependencies
         run: composer install --prefer-dist --no-interaction --no-progress
